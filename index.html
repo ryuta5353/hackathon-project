@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ハッカソンプロジェクト</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seed</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Hello Hackathon!</h1>
-  <script src="script.js"></script>
+  <header class="header">
+    <h1>🌱 Seed</h1>
+    <p>アイデアを種のように育てよう</p>
+  </header>
+
+  <button class="add-btn">＋ 新しい種を記録する</button>
+
+  <main class="main">
+    <!-- 種の段階 -->
+    <section class="section seed-section">
+      <h2>🌿 種の段階</h2>
+      <div class="card-list">
+        <div class="card-yellow">
+          <p class="title">新しいアプリのアイデア</p>
+          <p class="date">2025-10-28</p>
+        </div>
+        <div class="card-yellow">
+          <p class="title">オンラインコース</p>
+          <p class="date">2025-10-30</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 育てている -->
+    <section class="section grow-section">
+      <h2>🌱 育てている</h2>
+      <div class="card-list">
+        <div class="card-green">
+          <p class="title">ポッドキャスト企画</p>
+          <div class="footer">
+            <p class="date">2025-10-25</p>
+            <span class="tag">2件の記録</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section grow-section">
+        <h2>枯れている</h2>
+        <div class="card-list">
+          <div class="card-brown">
+            <p class="title">test</p>
+            <p class="date">2025-10-25</p>
+            <div class="footer">           
+              <span class="tag">2件の記録</span>
+            </div>
+          </div>
+        </div>
+      </section>
+  </main>
 </body>
 </html>

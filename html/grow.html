@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>tanelog</title>
+  <link rel="stylesheet" href="grow.css">
+</head>
+<body>
+  
+  <div id="grow-screen" class="screen">
+    <button>←戻る</button>
+    <div class="form-container">
+        <h2>🌱種を育てる</h2>
+        <div id="seed-to-grow" class="seed-card">
+            種の名前
+        </div>
+        <textarea name="progress-input" id="progress-input" placeholder="進捗や意見を記録しましょう...">
+
+        </textarea>
+        <div class="rating-section">
+            <label>評価(1-10)</label>
+            <input type="range" id="rating-slider" min="1" max="10" value="5">
+            <div class="rating-value">
+                    <span>1</span>
+                    <span id="rating-display">5</span>
+                    <span>10</span>
+            </div>
+        </div>
+        <button id="add-progress-button" class="main-button">記録を追加</button>
+        <div class="progress-history">
+            <h3>成長の記録</h3>
+            <div id="progress-list" class="progress-list">
+                成長記録リストをここに表示
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
