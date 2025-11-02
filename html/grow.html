@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>tanelog</title>
-  <link rel="stylesheet" href="grow.css">
+  <link rel="stylesheet" href="../css/grow.css">
 </head>
 <body>
   
   <div id="grow-screen" class="screen">
-    <button>←戻る</button>
+    <button onclick="goBack()" class="back-button">← 戻る</button>
     <div class="form-container">
         <h2>🌱種を育てる</h2>
-        <div id="seed-to-grow" class="seed-card">
+        <div id="seed-display" class="seed-card">
             種の名前
         </div>
         <textarea name="progress-input" id="progress-input" placeholder="進捗や意見を記録しましょう...">
@@ -35,6 +35,7 @@
         </div>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script type="module"src="../js/grow.js"></script>
 </body>
 </html>
+

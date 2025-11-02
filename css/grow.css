@@ -10,6 +10,22 @@ body {
     margin: 0 auto;
 }
 
+.back-button {
+    background: none;
+    border: none;
+    color: #059669;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    color: #047857;
+    transform: translateX(-5px);
+}
+
 .main-button {
     width: 100%;
     background-color: #10b981;
@@ -130,4 +146,67 @@ textarea:focus {
     font-size: 24px;
     color: #1f2937;
     margin-bottom: 20px;
+}
+
+.progress-item {
+    background-color: #d1fae5;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #10b981;
+    margin-bottom: 15px;
+    animation: slideIn 0.3s ease;
+}
+
+.progress-text {
+    color: #1f2937;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.progress-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.rating-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #d1d5db;
+}
+
+.rating-dot.filled {
+    background-color: #10b981;
+}
+
+.rating-score {
+    font-size: 14px;
+    font-weight: bold;
+    color: #10b981;
+}
+
+.progress-list:empty::before {
+    content: 'まだ記録がありません';
+    display: block;
+    text-align: center;
+    color: #9ca3af;
+    padding: 40px 20px;
+    font-size: 16px;
+}
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

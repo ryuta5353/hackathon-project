@@ -1,5 +1,17 @@
-    <div id="evaluate-screen" class="screen hidden">
-        <button class="back-button">← 戻る</button>
+
+
+    <!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seed</title>
+  <link rel="stylesheet" href="../css/seedRate.css" />
+</head>
+<body>
+  <main class="main">
+        <div id="evaluate-screen" class="screen">
+        <button onclick="goBack()" class="back-button">← 戻る</button>
         <div class="form-container">
             <h2>種を評価する</h2>
             <div id="seed-to-evaluate" class="seed-card">
@@ -16,3 +28,7 @@
             </div>
         </div>
     </div>
+  </main>
+  <script type="module"src="../js/seedRate.js"></script>
+</body>
+</html>

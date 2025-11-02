@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seed</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>🌱 Seed</h1>
+    <p>アイデアを種のように育てよう</p>
+  </header>
+
+  <a href="add.html" class="record">
+  <button class="add-btn">＋ 新しい種を記録する</button>
+  </a>
+
+  <main class="main">
+    
+    <!-- 種の段階 -->
+    <section class="section seed-section">
+      <h2>🌿 種の段階</h2>
+      <div class="card-list">
+        <a href="seedRate.html" class="test">
+          <div class="card-yellow">
+            <p class="title">新しいアプリのアイデア</p>
+            <p class="date">2025-10-28</p>
+          </div>
+        </a>
+        
+
+        <a href="seedRate.html" class="test">
+          <div class="card-yellow">
+          <p class="title">オンラインコース</p>
+          <p class="date">2025-10-30</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 育てている -->
+    <section class="section grow-section">
+      <h2>🌱 種を育てる</h2>
+      <div class="card-list">
+        <a href="grow.html" class="test">
+          <div class="card-green">
+            <p class="title">ポッドキャスト企画</p>
+            <div class="footer">
+            <p class="date">2025-10-25</p>
+            <span class="tag">2件の記録</span>
+          </div>
+        </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 枯れた -->
+    <section class="section grow-section">
+        <h2>🍂枯れている</h2>
+        <div class="card-list">
+          <div class="card-brown">
+            <p class="title">test</p>
+            <p class="date">2025-10-25</p>
+            <div class="footer">           
+              <span class="tag">2件の記録</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 🌿 種の一覧 -->
+<section class="section seed-section">
+  <h2>🌿 種の段階</h2>
+  <div class="card-list" id="seed-list"></div>
+</section>
+
+<!-- 🌱 育成中の種 -->
+<section class="section grow-section">
+  <h2>🌱 種を育てる</h2>
+  <div class="card-list" id="growing-list"></div>
+</section>
+
+<!-- 🍂 枯れた種 -->
+<section class="section withered-section">
+  <h2>🍂 枯れた種</h2>
+  <div class="card-list" id="withered-list"></div>
+</section>
+
+<!-- スクリプト -->
+<script type="module">
+  import { getData } from '../js/strage.js';
+
+  const data = getData();
+
+  // --- 🌿 種の一覧 ---
+  const seedList = document.getElementById('seed-list');
+  const seeds = data.seeds || [];
+  if (seeds.length === 0) {
+    seedList.innerHTML = '<p>まだ記録された種はありません。</p>';
+  } else {
+    seedList.innerHTML = seeds.map(seed => `
+      <div class="seed-card">
+        <h3>${seed.text}</h3>
+        <small>記録日: ${seed.date}</small>
+      </div>
+    `).join('');
+  }
+
+  // --- 🌱 育成中の種 ---
+  const growingList = document.getElementById('growing-list');
+  const growing = data.growingIdeas || [];
+  if (growing.length === 0) {
+    growingList.innerHTML = '<p>まだ育成中の種はありません。</p>';
+  } else {
+    growingList.innerHTML = growing.map(seed => `
+      <div class="seed-card">
+        <h3>${seed.text}</h3>
+        <small>記録日: ${seed.date}</small>
+        ${seed.progress && seed.progress.length > 0
+          ? `<p>進捗数: ${seed.progress.length}件</p>`
+          : `<p>進捗はまだありません。</p>`}
+      </div>
+    `).join('');
+  }
+
+  // --- 🍂 枯れた種 ---
+  const witheredList = document.getElementById('withered-list');
+  const withered = data.witheredIdeas || [];
+  if (withered.length === 0) {
+    witheredList.innerHTML = '<p>枯れた種はまだありません。</p>';
+  } else {
+    witheredList.innerHTML = withered.map(seed => `
+      <div class="seed-card">
+        <h3>${seed.text}</h3>
+        <small>記録日: ${seed.date}</small>
+        <p style="color: gray;">このアイデアは枯れました。</p>
+      </div>
+    `).join('');
+  }
+</script>
+
+      
+  </main>
+</body>
+</html>
