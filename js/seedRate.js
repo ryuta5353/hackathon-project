@@ -70,7 +70,7 @@ function handlePossible() {
     
     if (success) {
         // 育成画面へ
-        window.location.href = `grow.html?id=${seedId}`;
+        window.location.href = `index.html`;
     } else {
         alert('種の移動に失敗しました');
     }
@@ -84,7 +84,7 @@ function handleImpossible() {
     
     if (success) {
         // ホーム画面へ
-        window.location.href = 'home.html';
+        window.location.href = 'index.html';
     } else {
         alert('種の移動に失敗しました');
     }
@@ -101,7 +101,7 @@ function setupEventListeners() {
 }
 
 function goBack() {
-    window.location.href = 'home.html';
+    window.location.href = 'index.html';
 }
 
 window.goBack = goBack;

@@ -4,11 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Seed</title>
+  <link rel="stylesheet" href="../css/seedRate.css">
   <link rel="stylesheet" href="../css/style.css" />
+  
 </head>
 <body>
   <header class="header">
-    <h1>🌱 Seed</h1>
+    <h1>🌱 IdeaGrow</h1>
     <p>アイデアを種のように育てよう</p>
   </header>
 
@@ -18,78 +20,29 @@
 
   <main class="main">
     
-    <!-- 種の段階 -->
-    <section class="section seed-section">
-      <h2>🌿 種の段階</h2>
-      <div class="card-list">
-        <a href="seedRate.html" class="test">
-          <div class="card-yellow">
-            <p class="title">新しいアプリのアイデア</p>
-            <p class="date">2025-10-28</p>
-          </div>
-        </a>
-        
-
-        <a href="seedRate.html" class="test">
-          <div class="card-yellow">
-          <p class="title">オンラインコース</p>
-          <p class="date">2025-10-30</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- 育てている -->
-    <section class="section grow-section">
-      <h2>🌱 種を育てる</h2>
-      <div class="card-list">
-        <a href="grow.html" class="test">
-          <div class="card-green">
-            <p class="title">ポッドキャスト企画</p>
-            <div class="footer">
-            <p class="date">2025-10-25</p>
-            <span class="tag">2件の記録</span>
-          </div>
-        </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 枯れた -->
-    <section class="section grow-section">
-        <h2>🍂枯れている</h2>
-        <div class="card-list">
-          <div class="card-brown">
-            <p class="title">test</p>
-            <p class="date">2025-10-25</p>
-            <div class="footer">           
-              <span class="tag">2件の記録</span>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
       <!-- 🌿 種の一覧 -->
 <section class="section seed-section">
-  <h2>🌿 種の段階</h2>
+  <h2 class="main-text_1">🌿 種の選別</h2>
   <div class="card-list" id="seed-list"></div>
 </section>
 
 <!-- 🌱 育成中の種 -->
 <section class="section grow-section">
-  <h2>🌱 種を育てる</h2>
+  <h2 class="main-text_2">🌱 種を育てる</h2>
   <div class="card-list" id="growing-list"></div>
 </section>
 
 <!-- 🍂 枯れた種 -->
 <section class="section withered-section">
-  <h2>🍂 枯れた種</h2>
+  <h2 class="main-text_3">🍂 枯れた種</h2>
   <div class="card-list" id="withered-list"></div>
 </section>
 
 <!-- スクリプト -->
 <script type="module">
-  import { getData } from '../js/strage.js';
+  import { getData, deleteSeed, deleteGrowingSeed, deleteWitheredSeed } from '../js/storage.js';
 
   const data = getData();
 
@@ -100,9 +53,14 @@
     seedList.innerHTML = '<p>まだ記録された種はありません。</p>';
   } else {
     seedList.innerHTML = seeds.map(seed => `
-      <div class="seed-card">
-        <h3>${seed.text}</h3>
-        <small>記録日: ${seed.date}</small>
+      <div class="seed-card" onclick="location.href='seedRate.html?id=${seed.id}'">
+        <div class="seed-info">
+          <h3>${seed.text}</h3>
+          <small>記録日: ${seed.date}</small>
+        </div>
+        <div class="card-buttons">
+          <div class="delete-btn" data-id="${seed.id}" data-type="seed">✖</div>
+        </div>
       </div>
     `).join('');
   }
@@ -114,12 +72,17 @@
     growingList.innerHTML = '<p>まだ育成中の種はありません。</p>';
   } else {
     growingList.innerHTML = growing.map(seed => `
-      <div class="seed-card">
-        <h3>${seed.text}</h3>
-        <small>記録日: ${seed.date}</small>
-        ${seed.progress && seed.progress.length > 0
-          ? `<p>進捗数: ${seed.progress.length}件</p>`
-          : `<p>進捗はまだありません。</p>`}
+      <div class="seed-card" onclick="location.href='grow.html?id=${seed.id}'">
+        <div class="seed-info">
+          <h3>${seed.text}</h3>
+          <small>記録日: ${seed.date}</small>
+          ${seed.progress && seed.progress.length > 0
+            ? `<p>進捗数: ${seed.progress.length}件</p>`
+            : `<p>進捗はまだありません。</p>`}
+        </div>
+        <div class="card-buttons">
+          <div class="delete-btn" data-id="${seed.id}" data-type="growing">✖</div>
+        </div>
       </div>
     `).join('');
   }
@@ -132,15 +95,66 @@
   } else {
     witheredList.innerHTML = withered.map(seed => `
       <div class="seed-card">
-        <h3>${seed.text}</h3>
-        <small>記録日: ${seed.date}</small>
-        <p style="color: gray;">このアイデアは枯れました。</p>
+        <div class="seed-info">
+          <h3>${seed.text}</h3>
+          <small>記録日: ${seed.date}</small>
+          <p style="color: gray;">このアイデアは枯れました。</p>
+        </div>
+        <div class="card-buttons">
+          <div class="delete-btn" data-id="${seed.id}" data-type="withered">✖</div>
+        </div>
       </div>
     `).join('');
   }
+
+  const modal = document.getElementById('confirm-modal');
+  const confirmDeleteBtn = document.getElementById('confirm-delete');
+  const cancelDeleteBtn = document.getElementById('cancel-delete');
+
+  let currentTarget = { id: null, type: null };
+
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); 
+    const id = Number(btn.getAttribute('data-id')); 
+    const type = btn.getAttribute('data-type');
+
+    currentTarget = { id, type };
+    modal.classList.remove('hidden');
+    
+    confirmDeleteBtn.addEventListener("click",()=>{
+      const { id, type } = currentTarget;
+      let result = false; 
+      if(type==="seed") result = deleteSeed(id);
+      if(type==="growing") result = deleteGrowingSeed(id);
+      if(type==="withered") result = deleteWitheredSeed(id);
+
+      modal.classList.add('hidden');
+      if(result){
+        location.reload();
+      } else {
+        alert('削除に失敗しました。');
+      }
+    })
+
+    cancelDeleteBtn.addEventListener("click",()=>{
+      modal.classList.add('hidden');
+    })
+  });
+});
+
 </script>
 
       
   </main>
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-content">
+      <p>本当に削除しますか？</p>
+      <div class="modal-buttons">
+        <button id="confirm-delete" class="delete">削除</button>
+        <button id="cancel-delete" class="cancel">キャンセル</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,3 +1,11 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(to bottom right, #d1fae5, #99f6e4);
+    min-height: 100vh;
+    padding: 20px;
+    margin: 0;
+}
+
 .header {
     text-align: center;
   }
@@ -5,6 +13,25 @@
 .add-btn {
     display: block;
     margin: 20px auto;
+    padding:18px;
+    background-color: #56bd7c;
+    color: white;
+    border:none;
+    border-radius:18px;
+    font-size:18px;
+    font-weight:700;
+    
+    cursor:pointer;
+    transition: transform 0.3s ease-out;}
+
+.add-btn:hover {
+    color: #047857;
+    transform: translateY(-3px);
+    filter:brightness(1.05);
+}
+
+.record {
+    text-decoration: none;  
 }
 
 .main {
@@ -14,27 +41,128 @@
 .section {
     border: 1px solid;
     border-radius: 10px;
+    border-color: #bfbfbf;
     padding: 10px;
     margin: 10px auto;
-    width: 60%;    
+    width: 60%;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.card-yellow {
-    border: 1px solid;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px ;
-      
-}
 
-.card-green {
-    border: 1px solid;
-    border-radius: 10px;
-    margin: 10px;
+
+
+.seed-card {
+    display: block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
     padding-left: 10px;
+    background-color: #fef3c7;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:5px;
+    padding-bottom:10px;
+    
 }
 
-.card-brown {
-    border: 1px solid;
-    border-radius: 10px;
+.seed-card:hover {
+    /* 影を濃く、大きくして、浮き上がっているように見せる */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+    /* わずかに上に移動させる (オプション) */
+    
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* --- 非表示用クラス --- */
+.hidden {
+  display: none;
+}
+
+/* --- モーダル中身 --- */
+.modal-content {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* --- ボタン配置 --- */
+.modal-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-buttons button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin:0 5px;
+}
+
+.modal-buttons .delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.modal-buttons .delete:hover {
+  background-color: #c0392b;
+}
+
+.modal-buttons .cancel {
+  background-color: #ccc;
+  color: #333;
+}
+.modal-buttons .cancel:hover {
+  background-color: #999;
+}
+
+/* --- 簡単なアニメーション --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.main-text_1 {
+    font-size: 20px;
+    font-weight: bold;
+   
+    margin-bottom: 16px;
+    color:blue;
+}
+
+.main-text_2 {
+    font-size: 20px;
+    font-weight: bold;
+    
+    margin-bottom: 16px;
+    color: rgb(6, 183, 6);
+}
+.main-text_3 {
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-bottom: 16px;
+    color:brown;
 }

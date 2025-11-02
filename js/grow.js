@@ -61,7 +61,6 @@ function displaySeed() {
     
     display.innerHTML = `
         <div class="seed-text">${currentSeed.text}</div>
-        <div class="seed-date">${currentSeed.date}</div>
     `;
 }
 
@@ -84,7 +83,11 @@ function displayProgress() {
     console.log('進捗を表示しました:', currentSeed.progress.length + '件');
 }
 
-function createProgressCard(text, rating) {
+function createProgressCard(item) {
+
+    const text = (item.note ?? item.text ?? '').toString();
+    const rating = Number(item.rating) || 0;
+    const date = item.date ?? '';
     
     const card = document.createElement('div');
     card.className = 'progress-item';
@@ -163,7 +166,7 @@ function setupEventListeners() {
 }
 
 function goBack() {
-    window.location.href = 'home.html';
+    window.location.href = 'index.html';
 }
 
 window.goBack = goBack;

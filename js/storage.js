@@ -53,6 +53,8 @@ export function saveData(data) {
     }
 }
 
+
+
 //今日の日付
 export function getTodayDate() {
     const today = new Date();
@@ -172,6 +174,66 @@ export function moveSeedToWithered(seedId) {
     
     return true;
 }
+
+//種を削除
+export function deleteSeed(seedId) {
+    const data = getData();
+    
+    const index = data.seeds.findIndex(s => s.id === seedId);
+    
+    if (index === -1) {
+        console.error('❌ 種が見つかりません');
+        return false;
+    }
+    
+    const deletedSeed = data.seeds.splice(index, 1)[0];
+    
+    saveData(data);
+    console.log('🗑️ 種を削除しました:', deletedSeed);
+    
+    return true;
+}
+
+//育てている種を削除
+export function deleteGrowingSeed(seedId) {
+    const data = getData();
+    
+    const index = data.growingIdeas.findIndex(s => s.id === seedId);
+    
+    if (index === -1) {
+        console.error('❌ 育てている種が見つかりません');
+        return false;
+    }
+    
+    const deletedSeed = data.growingIdeas.splice(index, 1)[0];
+    
+    saveData(data);
+    console.log('🗑️ 育てている種を削除しました:', deletedSeed);
+    
+    return true;
+}
+
+//枯れた種を削除
+export function deleteWitheredSeed(seedId) {
+    const data = getData();
+    
+    const index = data.witheredIdeas.findIndex(s => s.id === seedId);
+    
+    if (index === -1) {
+        console.error('❌ 枯れた種が見つかりません');
+        return false;
+    }
+    
+    const deletedSeed = data.witheredIdeas.splice(index, 1)[0];
+    
+    saveData(data);
+    console.log('🗑️ 枯れた種を削除しました:', deletedSeed);
+    
+    return true;
+}
+
+
+
 
 //進捗を追加
 export function addProgress(seedId, note, rating) {

@@ -30,15 +30,17 @@
       nav {
         margin-bottom:20px;
         position: absolute;
-        top: 20px;
-        left: 20px;
+        font-size: 16px;
+        top: 30px;
+        left: 40px;
       }
       nav a {
         text-decoration:none;
-        color:var(--subtext);
+        color:#059669;
         display:inline-flex;
         align-items:center;
         gap:6px;
+        transition: all 0.3s ease;
       }
       nav a:hover {opacity:0.8;}
       main {
@@ -108,7 +110,7 @@
   </head>
   <body>
     <nav aria-label="ページナビゲーション">
-      <a href="#" onclick="history.back(); return false;" aria-label="前の画面に戻る">戻る</a>
+      <a href="#" onclick="history.back(); return false;" aria-label="前の画面に戻る">←戻る</a>
     </nav>
     <main role="region" aria-labelledby="page-title">
       <h1 id="page-title">:芽: 種を記録する</h1>
@@ -121,7 +123,7 @@
       <p id="result" aria-live="polite"></p>
     </main>
     <script type="module">
-  import { addSeed } from './storage.js';  // storage.js から addSeed 関数をインポート
+  import { addSeed } from '../js/storage.js';  // storage.js から addSeed 関数をインポート
   const form   = document.getElementById('seed-form');
   const area   = document.getElementById('seed-text');
   const result = document.getElementById('result');
@@ -141,6 +143,7 @@
     // ローカルストレージへ保存（失敗してもエラーだけ出して処理を止めない）
     try {
       addSeed(val);
+      location.href = 'index.html'; // ホーム画面に戻る
     } catch (err) {
       console.error('保存に失敗:', err);
       // 必要に応じてエラーメッセージを画面に表示する
